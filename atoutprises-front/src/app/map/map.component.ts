@@ -11,6 +11,11 @@ class MapProperties {
   height: number;
 }
 
+class Prise {
+  x: number;
+  y: number;
+}
+
 @Component({
   selector: 'app-map',
   templateUrl: './map.component.html',
@@ -25,8 +30,10 @@ export class MapComponent implements OnInit, AfterViewInit {
   private zoom: any;
   private tile: any;
   private raster: any;
+  private pointsLayer: any;
   private tiles: any;
   private mur: Mur;
+  private prises = new Array<Prise>();
 
   constructor(private murService: MurService) {
   }
@@ -63,14 +70,42 @@ export class MapComponent implements OnInit, AfterViewInit {
       // .attr('height', this.props.height)
       .attr('viewBox', `0 0 ${this.props.width} ${this.props.height}`)
       .classed('svg-content', true);
+    this.svg.on('click', this.clicked.bind(this));
     this.raster = this.svg.append('g');
+    this.pointsLayer = this.svg.append('g');
   }
 
   private zoomed() {
     let t = d3.event.transform;
-    t = t.translate(this.props.width / 1.5, this.props.height).scale(1024);
+    t = t.translate(700, 512).scale(1024);
     this.tiles = this.tile.scale(t.k).translate([t.x, t.y])();
     this.tileLayers();
+    this.drawPoints();
+  }
+
+  private clicked() {
+    const t = d3.event;
+    const transform = d3Zoom.zoomTransform(this.svg.node());
+    const mouseX = d3.event.layerX || d3.event.offsetX;
+    const mouseY = d3.event.layerY || d3.event.offsety;
+    const coordinates = transform.invert([mouseX, mouseY]);
+    coordinates[0] = coordinates[0] - 188;
+    console.log('Pushing prise');
+    this.prises.push({x: coordinates[0], y: coordinates[1]} as Prise);
+    this.drawPoints();
+  }
+
+  private drawPoints() {
+    const transform = d3Zoom.zoomTransform(this.svg.node());
+    const circle = this.pointsLayer.selectAll('circle').data(this.prises);
+    circle.exit().remove();
+
+    circle.enter().append('circle').attr('stroke', 'greenyellow')
+    .attr('fill', 'none')
+    .merge(circle).attr('cx', d => transform.apply([d.x + 188, d.y])[0])
+    .attr('cy', d => transform.apply([d.x + 188, d.y])[1])
+    .attr('stroke-width', d => 0.5 * transform.k)
+    .attr('r', d => transform.k * 4);
   }
 
   private tileLayers() {

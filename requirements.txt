@@ -1,0 +1,28 @@
+# Core
+pytz
+Django
+gunicorn
+django-configurations
+whitenoise
+Pillow
+django-cors-headers
+
+# Model Tools
+django-model-utils
+django_unique_upload
+
+# Rest apis
+djangorestframework
+
+# Developer Tools
+ipdb
+ipython
+mkdocs
+flake8
+
+# Testing
+mock
+factory-boy
+django-nose
+nose-progressive
+coverage

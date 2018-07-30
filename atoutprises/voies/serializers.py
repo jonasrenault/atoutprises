@@ -2,7 +2,7 @@ import json
 
 from rest_framework import serializers
 
-from atoutprises.voies.models import Wall, Route
+from atoutprises.voies.models import Wall, Route, Top
 
 
 class JSONSerializerField(serializers.Field):
@@ -28,4 +28,10 @@ class RouteSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Route
+        fields = ('id', 'wall', 'setter', 'colour', 'grade', 'lane', 'holds', 'tops')
+
+
+class TopSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Top
         fields = '__all__'

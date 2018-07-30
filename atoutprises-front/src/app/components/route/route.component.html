@@ -8,23 +8,21 @@
   </div>
 
   <div class="form-group bmd-form-group" [class.was-validated]="routeForm.get('colour').dirty || routeForm.get('colour').touched || wasValidated">
-    <label for="colourSelect" class="bmd-label-static">Couleur :</label>
     <ng-select #colourSelect [items]="colours"
             [selectOnTab]="true"
             bindValue="key"
-            placeholder="Select colour"
+            placeholder="Couleur: "
             formControlName="colour" id="colourSelect" required>
     </ng-select>
     <div class="invalid-feedback">
-      Please select a lane number.
+      Color is required.
     </div>
   </div>
 
   <div class="form-group bmd-form-group" [class.was-validated]="routeForm.get('grade').dirty || routeForm.get('grade').touched || wasValidated">
-    <label for="gradeSelect" class="bmd-label-static">Quotation :</label>
     <ng-select #gradeSelect [items]="grades"
             [selectOnTab]="true"
-            placeholder="Select grade"
+            placeholder="Quotation"
             formControlName="grade" id="gradeSelect" required>
     </ng-select>
     <div class="invalid-feedback">

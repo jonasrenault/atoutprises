@@ -40,6 +40,10 @@ class UserManager(BaseUserManager):
         return self._create_user(email, password, **extra_fields)
 
 
+grades = ['3a', '3b', '3c', '4a', '4b', '4c', '5a', '5a+', '5b', '5b+', '5c', '5c+', '6a', '6a+', '6b',
+          '6b+', '6c', '6c+', '7a', '7a+', '7b', '7b+', '7c', '7c+', '8a', '8a+', '8b', '8b+', '8c', '9a']
+
+
 class User(AbstractUser):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     email = models.EmailField(
@@ -62,6 +66,9 @@ class User(AbstractUser):
     objects = UserManager()
     REQUIRED_FIELDS = ['first_name', 'last_name']
 
+    score = models.FloatField(null=False, blank=False, default=0.0)
+    max_grade = models.CharField('max grade topped', max_length=10, blank=True, default=grades[0])
+
     def __str__(self):
         return self.email
 
@@ -74,3 +81,21 @@ class User(AbstractUser):
     @property
     def is_staff(self):
         return self.is_admin
+
+    @property
+    def tops(self):
+        return self.topped.count()
+
+    def set_max_grade(self, grade):
+        try:
+            old_index = grades.index(self.max_grade)
+        except:
+            old_index = 0
+
+        try:
+            new_index = grades.index(grade)
+        except:
+            new_index = 0
+
+        if new_index > old_index:
+            self.max_grade = grade

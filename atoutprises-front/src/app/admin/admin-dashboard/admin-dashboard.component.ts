@@ -4,6 +4,7 @@ import { Route, Hold } from '../../models/route';
 import { Wall } from '../../models/wall';
 import { WallService } from '../../services/wall.service';
 import { ToastrService } from 'ngx-toastr';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -15,6 +16,7 @@ export class AdminDashboardComponent implements OnInit {
   route: Route;
   wall: Wall;
   holds = new Array<Hold>();
+  routes: Observable<Route[]>;
   constructor(private wallService: WallService, private toastr: ToastrService, private activeRoute: ActivatedRoute) { }
 
   ngOnInit() {
@@ -24,6 +26,7 @@ export class AdminDashboardComponent implements OnInit {
         this.wall = data.wall;
         this.route.wall = this.wall.id;
       });
+    this.routes = this.wallService.getRoutes();
   }
 
   onRouteCreate(route: Route) {
@@ -33,6 +36,15 @@ export class AdminDashboardComponent implements OnInit {
       this.route = new Route();
       this.route.wall = this.wall.id;
     });
+  }
+
+  onChange(route: Route) {
+    if (route) {
+      this.route = route;
+    } else {
+      this.route = new Route();
+      this.route.wall = this.wall.id;
+    }
   }
 
 }

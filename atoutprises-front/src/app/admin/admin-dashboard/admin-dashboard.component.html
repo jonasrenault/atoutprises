@@ -2,6 +2,7 @@
 
   <div class="row">
     <div class="col-md-3">
+      <app-route-list [routes$]="routes" (change)="onChange($event)"></app-route-list>
       <app-route [route]="route" (create)="onRouteCreate($event)"></app-route>
     </div>
     <div class="col-md-9">

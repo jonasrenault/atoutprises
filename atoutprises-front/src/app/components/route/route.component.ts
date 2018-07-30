@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, ViewEncapsulation, EventEmitter, Output, OnChanges, SimpleChange } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Route } from '../../models/route';
+import { colourList, grades } from '../../utils/defaults';
 
 @Component({
   selector: 'app-route',
@@ -14,11 +15,8 @@ export class RouteComponent implements OnInit, OnChanges {
   @Output() create = new EventEmitter<Route>();
   wasValidated = false;
   routeForm: FormGroup;
-  colours = [{ label: 'Rouge', key: 'red' }, { label: 'Vert', key: 'green' }, { label: 'Bleu', key: 'blue' },
-  { label: 'Jaune', key: 'jaune' }, { label: 'Noir', key: 'black' }, { label: 'Blanc', key: 'white' },
-  { label: 'Orange', key: 'orange' }, { label: 'Rose', key: 'pink' }];
-  grades = ['3a', '3b', '3c', '4a', '4b', '4c', '5a', '5a+', '5b', '5b+', '5c', '5c+', '6a', '6a+', '6b',
-    '6b+', '6c', '6c+', '7a', '7a+', '7b', '7b+', '7c', '7c+', '8a', '8a+', '8b', '8b+', '8c', '9a'];
+  colours = colourList;
+  grades = grades;
 
   constructor(private fb: FormBuilder) {
 

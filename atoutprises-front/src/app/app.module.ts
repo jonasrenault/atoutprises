@@ -19,6 +19,7 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 import { RouteComponent } from './components/route/route.component';
+import { RouteListComponent } from './routes/route-list/route-list.component';
 
 const appRoutes: Routes = [
   { path: 'map', component: MapComponent },
@@ -42,7 +43,8 @@ const appRoutes: Routes = [
     NavbarComponent,
     ProfileComponent,
     AdminDashboardComponent,
-    RouteComponent
+    RouteComponent,
+    RouteListComponent
   ],
   imports: [
     BrowserModule,

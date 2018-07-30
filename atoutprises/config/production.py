@@ -15,3 +15,20 @@ class Production(Common):
     # CORS_ORIGIN_ALLOW_ALL = False
     # CORS_ORIGIN_WHITELIST = ('cartolab.lri.fr',)
     CORS_ORIGIN_ALLOW_ALL = True
+
+    # Password Validation
+    # https://docs.djangoproject.com/en/2.0/topics/auth/passwords/#module-django.contrib.auth.password_validation
+    AUTH_PASSWORD_VALIDATORS = [
+        {
+            'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        },
+        {
+            'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        },
+        {
+            'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        },
+        {
+            'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        },
+    ]

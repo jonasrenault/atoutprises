@@ -5,4 +5,10 @@ export class Route {
   colour: string;
   grade: string;
   lane: string;
+  holds: Hold[];
+}
+
+export class Hold {
+  x: number;
+  y: number;
 }

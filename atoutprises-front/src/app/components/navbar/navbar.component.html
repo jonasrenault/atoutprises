@@ -26,7 +26,7 @@
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <app-login></app-login>
+      <app-login (logged)="onLogged($event)"></app-login>
     </div>
   </div>
 </div>

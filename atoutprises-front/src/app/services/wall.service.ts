@@ -5,15 +5,16 @@ import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WallService {
 
-  private mursUrl = environment.apiEndpoint + '/walls';
-  private routesUrl = environment.apiEndpoint + '/routes';
-  constructor(private http: HttpClient) { }
+  private mursUrl = environment.apiEndpoint + '/walls/';
+  private routesUrl = environment.apiEndpoint + '/routes/';
+  constructor(private http: HttpClient, private toastr: ToastrService) { }
 
   getWalls() {
     return this.http.get<Wall[]>(this.mursUrl)
@@ -21,12 +22,21 @@ export class WallService {
   }
 
   createTiles(mur: Wall, maxZoom: number) {
-    const tilesUrl = `${this.mursUrl}/${mur.id}/tile/`;
+    const tilesUrl = `${this.mursUrl}${mur.id}/tile/`;
     return this.http.get<Wall>(tilesUrl).pipe(catchError(this.handleError('creating tiles')));
   }
 
   getRoutes() {
     return this.http.get<Route[]>(this.routesUrl).pipe(catchError(this.handleError('getting routes')));
+  }
+
+  createRoute(route: Route): Observable<Route> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      })
+    };
+    return this.http.post<Route>(this.routesUrl, route, httpOptions).pipe(catchError(this.handleError('creating route')));
   }
 
   /**
@@ -47,7 +57,9 @@ export class WallService {
       }
 
       // return an observable with a user-facing error message
-      return throwError(`An error occured while ${operation}. Please try again later.`);
+      const msg = `An error occured while ${operation}. Please try again later.`;
+      this.toastr.error(msg);
+      return throwError(msg);
     };
   }
 }

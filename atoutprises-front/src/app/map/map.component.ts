@@ -5,15 +5,11 @@ import * as d3Tile from 'd3-tile';
 import { environment } from '../../environments/environment';
 import { WallService } from '../services/wall.service';
 import { Wall } from '../models/wall';
+import { Hold } from '../models/route';
 
 class MapProperties {
   width: number;
   height: number;
-}
-
-class Prise {
-  x: number;
-  y: number;
 }
 
 @Component({
@@ -24,6 +20,8 @@ class Prise {
 export class MapComponent implements OnInit, AfterViewInit {
 
   @ViewChild('mapcontainer') container: ElementRef;
+  @Input() wall: Wall;
+  @Input() holds: Array<Hold>;
   private props = new MapProperties();
   private tilesUrl = environment.staticEndpoint;
   private svg: any;
@@ -32,26 +30,20 @@ export class MapComponent implements OnInit, AfterViewInit {
   private raster: any;
   private pointsLayer: any;
   private tiles: any;
-  private mur: Wall;
-  private prises = new Array<Prise>();
 
   constructor(private wallService: WallService) {
   }
 
   ngOnInit() {
-    this.wallService.getWalls().subscribe(murs => this.mur = murs[0]);
   }
 
   ngAfterViewInit() {
     const boundingRect = this.container.nativeElement.getBoundingClientRect();
     this.props.width = boundingRect.width - 4;
     this.props.height = boundingRect.height - 4;
-    this.wallService.getWalls().subscribe(murs => {
-      this.mur = murs[0];
-      this.initZoom();
-      this.initSvg();
-      this.resetZoom();
-    });
+    this.initZoom();
+    this.initSvg();
+    this.resetZoom();
   }
 
   private initZoom() {
@@ -91,13 +83,13 @@ export class MapComponent implements OnInit, AfterViewInit {
     const coordinates = transform.invert([mouseX, mouseY]);
     coordinates[0] = coordinates[0] - 188;
     console.log('Pushing prise');
-    this.prises.push({x: coordinates[0], y: coordinates[1]} as Prise);
+    this.holds.push({x: coordinates[0], y: coordinates[1]} as Hold);
     this.drawPoints();
   }
 
   private drawPoints() {
     const transform = d3Zoom.zoomTransform(this.svg.node());
-    const circle = this.pointsLayer.selectAll('circle').data(this.prises);
+    const circle = this.pointsLayer.selectAll('circle').data(this.holds);
     circle.exit().remove();
 
     circle.enter().append('circle').attr('stroke', 'greenyellow')
@@ -128,7 +120,7 @@ export class MapComponent implements OnInit, AfterViewInit {
   }
 
   private buildTileUrl(zoom: number, x: number, y: number) {
-    const max = this.mur.tiles_per_zoom[zoom];
+    const max = this.wall.tiles_per_zoom[zoom];
     if (y < max[0] && x < max[1]) {
       return `${this.tilesUrl}/${zoom}/${x}/${y}.png`;
     }

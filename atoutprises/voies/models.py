@@ -17,6 +17,7 @@ class Route(models.Model):
     colour = models.CharField(max_length=100)
     grade = models.CharField(max_length=100)
     lane = models.CharField(max_length=100)
+    holds = models.TextField(null=True, blank=True, default=None)
 
     def __str__(self):
         return 'lane %s: %s %s (%s)' % (self.lane, self.grade, self.colour, self.setter)

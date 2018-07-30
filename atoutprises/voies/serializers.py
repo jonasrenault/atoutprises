@@ -24,6 +24,7 @@ class WallSerializer(serializers.ModelSerializer):
 
 class RouteSerializer(serializers.ModelSerializer):
     wall = serializers.PrimaryKeyRelatedField(many=False, queryset=Wall.objects.all())
+    holds = JSONSerializerField()
 
     class Meta:
         model = Route

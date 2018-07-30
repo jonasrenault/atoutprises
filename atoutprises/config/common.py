@@ -1,3 +1,4 @@
+import datetime
 import os
 from os.path import join
 from distutils.util import strtobool
@@ -183,5 +184,9 @@ class Common(Configuration):
             'rest_framework.authentication.SessionAuthentication',
             'rest_framework.authentication.BasicAuthentication',
         ),
+    }
+
+    JWT_AUTH = {
+        'JWT_EXPIRATION_DELTA': datetime.timedelta(days=7),
     }
 

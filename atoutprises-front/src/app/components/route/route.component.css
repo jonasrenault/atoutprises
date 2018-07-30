@@ -1,0 +1,8 @@
+ng-select.ng-invalid.ng-touched .ng-select-container {
+    border-color: #dc3545;
+}
+
+
+.was-validated ng-select.ng-invalid~.invalid-feedback {
+  display: block;
+}

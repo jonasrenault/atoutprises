@@ -1,3 +1,11 @@
-<p>
-  admin-dashboard works!
-</p>
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-3">
+      <app-route [route]="route" (create)="onRouteCreate($event)"></app-route>
+    </div>
+    <div class="col-md-9">
+      <app-map [wall]=wall [holds]="holds"></app-map>
+    </div>
+  </div>
+</div>

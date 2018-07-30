@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
+declare let $: any;
 
 @Component({
   selector: 'app-navbar',
@@ -19,6 +20,10 @@ export class NavbarComponent implements OnInit {
 
   logout() {
     this.authService.logout();
+  }
+
+  onLogged($event: boolean) {
+    $('#loginModal').modal('hide');
   }
 
 }

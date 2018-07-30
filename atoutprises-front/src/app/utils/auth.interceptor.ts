@@ -13,7 +13,6 @@ export class AuthInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     if (this.authService.isLoggedIn()) {
-      console.log('Adding header');
       const token = this.authService.getToken();
       const cloned = req.clone({
         headers: req.headers.set('Authorization', `JWT ${token}`)

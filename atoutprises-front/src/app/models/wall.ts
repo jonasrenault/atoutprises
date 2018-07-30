@@ -1,4 +1,4 @@
-export class Mur {
+export class Wall {
   id: number;
   label: string;
   key: string;

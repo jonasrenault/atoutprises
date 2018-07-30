@@ -1,26 +1,51 @@
-from rest_framework import viewsets, mixins
-from rest_framework.permissions import AllowAny
+from rest_framework import viewsets, permissions
+from rest_framework.permissions import AllowAny, IsAdminUser
+from rest_framework.response import Response
+from rest_framework.views import APIView
+
 from .models import User
-from .permissions import IsUserOrReadOnly
-from .serializers import CreateUserSerializer, UserSerializer
+from .serializers import UserSerializer
 
 
-class UserViewSet(mixins.RetrieveModelMixin,
-                  mixins.UpdateModelMixin,
-                  viewsets.GenericViewSet):
+class UserViewSet(viewsets.ModelViewSet):
     """
-    Updates and retrieves user accounts
+    A viewset for viewing and editing user instances.
     """
-    queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = (IsUserOrReadOnly,)
-
-
-class UserCreateViewSet(mixins.CreateModelMixin,
-                        viewsets.GenericViewSet):
-    """
-    Creates user accounts
-    """
     queryset = User.objects.all()
-    serializer_class = CreateUserSerializer
-    permission_classes = (AllowAny,)
+
+    def get_permissions(self):
+        """
+        Instantiates and returns the list of permissions that this view requires.
+        """
+        if self.action == 'list':
+            permission_classes = [AllowAny]
+        else:
+            permission_classes = [IsAdminUser]
+        return [permission() for permission in permission_classes]
+
+
+class UserProfileView(APIView):
+    """
+    Returns the current user's profile.
+
+    * user must be logged in
+    """
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get(self, request):
+        serializer = UserSerializer(request.user)
+        return Response(serializer.data)
+
+
+class IsAdminView(APIView):
+    """
+    Convenience view to check whether the user is an admin or not.
+    Returns true if the user is an admin
+
+    * only admins can access this view
+    """
+    permission_classes = (permissions.IsAdminUser, )
+
+    def get(self, request):
+        return Response(True)

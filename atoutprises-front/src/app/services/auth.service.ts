@@ -16,8 +16,13 @@ export const EXPIRATION_NAME = 'expires_at';
 export class AuthService {
 
   private loginUrl = environment.apiEndpoint + '/api-token-auth/';
+  private isAdminUrl = environment.apiEndpoint + '/profile/isadmin/';
 
   constructor(private http: HttpClient) {
+  }
+
+  checkIsUserAdmin() {
+    return this.http.get<boolean>(this.isAdminUrl);
   }
 
   login(email: string, password: string) {

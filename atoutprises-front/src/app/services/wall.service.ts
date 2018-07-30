@@ -1,26 +1,32 @@
 import { Injectable } from '@angular/core';
-import { Mur } from './mur';
+import { Wall } from '../models/wall';
+import { Route } from '../models/route';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-import { environment } from '../environments/environment';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MurService {
+export class WallService {
 
-  private mursUrl = environment.apiEndpoint + '/murs';
+  private mursUrl = environment.apiEndpoint + '/walls';
+  private routesUrl = environment.apiEndpoint + '/routes';
   constructor(private http: HttpClient) { }
 
-  getMurs() {
-    return this.http.get<Mur[]>(this.mursUrl)
-      .pipe(catchError(this.handleError('getting datasets')));
+  getWalls() {
+    return this.http.get<Wall[]>(this.mursUrl)
+      .pipe(catchError(this.handleError('getting walls')));
   }
 
-  createTiles(mur: Mur, maxZoom: number) {
+  createTiles(mur: Wall, maxZoom: number) {
     const tilesUrl = `${this.mursUrl}/${mur.id}/tile/`;
-    return this.http.get<Mur>(tilesUrl).pipe(catchError(this.handleError('creating tiles')));
+    return this.http.get<Wall>(tilesUrl).pipe(catchError(this.handleError('creating tiles')));
+  }
+
+  getRoutes() {
+    return this.http.get<Route[]>(this.routesUrl).pipe(catchError(this.handleError('getting routes')));
   }
 
   /**

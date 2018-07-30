@@ -9,15 +9,18 @@ import { ToastrModule } from 'ngx-toastr';
 
 import { AuthInterceptor } from './utils/auth.interceptor';
 import { AuthGuard } from './utils/auth.guard';
+import { AdminGuard } from './utils/admin.guard';
 import { AppComponent } from './app.component';
 import { MapComponent } from './map/map.component';
 import { LoginComponent } from './components/login/login.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { ProfileComponent } from './profile/profile.component';
+import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 
 const appRoutes: Routes = [
   { path: 'map', component: MapComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard]},
+  { path: 'admin', component: AdminDashboardComponent, canActivate: [AdminGuard]},
   { path: '',
     redirectTo: '/map',
     pathMatch: 'full'
@@ -30,7 +33,8 @@ const appRoutes: Routes = [
     MapComponent,
     LoginComponent,
     NavbarComponent,
-    ProfileComponent
+    ProfileComponent,
+    AdminDashboardComponent
   ],
   imports: [
     BrowserModule,

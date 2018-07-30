@@ -2,17 +2,16 @@ import uuid
 
 from django.contrib.auth.base_user import BaseUserManager
 from django.db import models
-from django.contrib.auth.models import AbstractUser, PermissionsMixin
+from django.contrib.auth.models import AbstractUser
+from django.utils.translation import gettext_lazy as _
 
 
 class UserManager(BaseUserManager):
-    """
-    A custom user manager to deal with emails as unique identifiers for auth
-    instead of usernames. The default that's used is "UserManager"
-    """
-    def create_user(self, email, password, **extra_fields):
+    use_in_migrations = True
+
+    def _create_user(self, email, password, **extra_fields):
         """
-        Creates and saves a User with the given email, and password.
+        Create and save a user with the given username, email, and password.
         """
         if not email:
             raise ValueError('Users must have an email address')
@@ -24,32 +23,40 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
+    def create_user(self, email, password=None, **extra_fields):
+        extra_fields.setdefault('is_admin', False)
+        extra_fields.setdefault('is_superuser', False)
+        return self._create_user(email, password, **extra_fields)
+
     def create_superuser(self, email, password, **extra_fields):
-        """
-        Creates and saves a superuser with the given email and password.
-        """
-        user = self.create_user(
-            email,
-            password=password,
-            **extra_fields
-        )
-        user.is_admin = True
-        user.save(using=self._db)
-        return user
+        extra_fields.setdefault('is_admin', True)
+        extra_fields.setdefault('is_superuser', True)
+
+        if extra_fields.get('is_admin') is not True:
+            raise ValueError('Superuser must have is_admin=True.')
+        if extra_fields.get('is_superuser') is not True:
+            raise ValueError('Superuser must have is_superuser=True.')
+
+        return self._create_user(email, password, **extra_fields)
 
 
 class User(AbstractUser):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     email = models.EmailField(
         verbose_name='email address',
         max_length=255,
         unique=True,
     )
-    uuid = models.UUIDField(default=uuid.uuid4, editable=False)
-    is_admin = models.BooleanField(default=False, help_text=(
-        'Designates whether this user is admin.'),
+    username = models.CharField(
+        _('username'),
+        max_length=150,
+        help_text=_('150 characters or fewer.'),
+        blank=True
     )
-    is_active = models.BooleanField(default=True, help_text=(
-        'Designates whether this user should be treated as active. Unselect this instead of deleting accounts.'),
+    is_admin = models.BooleanField(
+        _('admin status'),
+        default=False,
+        help_text=_('Designates whether the user is admin.'),
     )
     USERNAME_FIELD = 'email'
     objects = UserManager()
@@ -66,9 +73,4 @@ class User(AbstractUser):
 
     @property
     def is_staff(self):
-        "Is the user a member of staff?"
-        # Simplest possible answer: All admins are staff
         return self.is_admin
-
-
-

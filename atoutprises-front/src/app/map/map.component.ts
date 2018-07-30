@@ -3,8 +3,8 @@ import * as d3 from 'd3-selection';
 import * as d3Zoom from 'd3-zoom';
 import * as d3Tile from 'd3-tile';
 import { environment } from '../../environments/environment';
-import { MurService } from '../mur.service';
-import { Mur } from '../mur';
+import { WallService } from '../services/wall.service';
+import { Wall } from '../models/wall';
 
 class MapProperties {
   width: number;
@@ -32,21 +32,21 @@ export class MapComponent implements OnInit, AfterViewInit {
   private raster: any;
   private pointsLayer: any;
   private tiles: any;
-  private mur: Mur;
+  private mur: Wall;
   private prises = new Array<Prise>();
 
-  constructor(private murService: MurService) {
+  constructor(private wallService: WallService) {
   }
 
   ngOnInit() {
-    this.murService.getMurs().subscribe(murs => this.mur = murs[0]);
+    this.wallService.getWalls().subscribe(murs => this.mur = murs[0]);
   }
 
   ngAfterViewInit() {
     const boundingRect = this.container.nativeElement.getBoundingClientRect();
     this.props.width = boundingRect.width - 4;
     this.props.height = boundingRect.height - 4;
-    this.murService.getMurs().subscribe(murs => {
+    this.wallService.getWalls().subscribe(murs => {
       this.mur = murs[0];
       this.initZoom();
       this.initSvg();

@@ -1,9 +1,8 @@
 import json
 
 from rest_framework import serializers
-from rest_framework.fields import JSONField
 
-from atoutprises.voies.models import Mur
+from atoutprises.voies.models import Wall, Route
 
 
 class JSONSerializerField(serializers.Field):
@@ -15,9 +14,17 @@ class JSONSerializerField(serializers.Field):
         return json.loads(value)
 
 
-class MurSerializer(serializers.ModelSerializer):
+class WallSerializer(serializers.ModelSerializer):
     tiles_per_zoom = JSONSerializerField()
 
     class Meta:
-        model = Mur
+        model = Wall
         fields = ('id', 'key', 'label', 'max_zoom', 'tiles_per_zoom')
+
+
+class RouteSerializer(serializers.ModelSerializer):
+    wall = serializers.PrimaryKeyRelatedField(many=False, queryset=Wall.objects.all())
+
+    class Meta:
+        model = Route
+        fields = '__all__'

@@ -1,0 +1,68 @@
+[
+  {
+    "model": "users.User",
+    "pk": "f75a882e-94aa-11e8-9eb6-529269fb1459",
+    "fields": {
+      "email": "ae@lri.fr",
+      "first_name": "Adrien",
+      "last_name": "Echiffre",
+      "facebook_id": "1212291346",
+      "max_grade": "8a"
+    }
+  },
+  {
+    "model": "users.User",
+    "pk": "59e2986a-94ab-11e8-9eb6-529269fb1459",
+    "fields": {
+      "email": "bp@lri.fr",
+      "first_name": "Benoît",
+      "last_name": "Prez",
+      "facebook_id": "1014219689",
+      "max_grade": "6a"
+    }
+  },
+  {
+    "model": "users.User",
+    "pk": "5f92eb8e-94ab-11e8-9eb6-529269fb1459",
+    "fields": {
+      "email": "ac@lri.fr",
+      "first_name": "Arthur",
+      "last_name": "Cornille",
+      "facebook_id": "100001134541261",
+      "max_grade": "7a"
+    }
+  },
+  {
+    "model": "users.User",
+    "pk": "6429093a-94ab-11e8-9eb6-529269fb1459",
+    "fields": {
+      "email": "vc@lri.fr",
+      "first_name": "Vincent",
+      "last_name": "Clément",
+      "facebook_id": "711670405",
+      "max_grade": "6c"
+    }
+  },
+  {
+    "model": "users.User",
+    "pk": "67da3784-94ab-11e8-9eb6-529269fb1459",
+    "fields": {
+      "email": "s@lri.fr",
+      "first_name": "Seven",
+      "last_name": "Seas",
+      "facebook_id": "100002022297486",
+      "max_grade": "7a"
+    }
+  },
+  {
+    "model": "users.User",
+    "pk": "6b6483fa-94ab-11e8-9eb6-529269fb1459",
+    "fields": {
+      "email": "fp@lri.fr",
+      "first_name": "Frédéric",
+      "last_name": "Perrin",
+      "facebook_id": "694222931",
+      "max_grade": "6c+"
+    }
+  }
+]

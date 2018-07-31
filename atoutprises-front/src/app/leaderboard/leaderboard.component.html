@@ -1,0 +1,46 @@
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Grimpeur</th>
+      <th scope="col">Score</th>
+      <th scope="col">Tops</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users; let i = index" class="user-row">
+      <th scope="row">
+        {{i + 1}}
+        <i class="fas fa-medal" *ngIf="i < 3" [ngClass]="{'gold': i===0, 'silver': i===1, 'bronze': i===2}"></i>
+      </th>
+      <td>
+        <ngx-avatar [facebookId]="user.facebook_id" size="40" [round]="true" class="user-avatar">
+        </ngx-avatar>
+        <span class="capitalize">{{user.first_name}} {{user.last_name}}</span>
+      </td>
+      <td class="user-score">
+        {{user.score}}
+      </td>
+      <td>
+        <div class="tops">
+          {{user.tops}}
+          <span *ngIf="user.max_grade !== '3a'">
+            (
+            <span [ngClass]="{'yellow': user.max_grade.charAt(0) === '3',
+                                  'orange': user.max_grade.charAt(0) === '4',
+                                  'green': user.max_grade.charAt(0) === '5',
+                                  'blue': user.max_grade.charAt(0) === '6',
+                                  'red': user.max_grade.charAt(0) === '7',
+                                  'black': user.max_grade.charAt(0) === '8'}">
+              {{user.max_grade}}
+            </span>
+            <span class="max">
+              max
+            </span>
+             )
+          </span>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>

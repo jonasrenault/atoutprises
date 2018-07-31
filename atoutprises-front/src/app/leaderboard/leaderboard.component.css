@@ -1,0 +1,68 @@
+.capitalize {
+    text-transform: capitalize;
+}
+
+.user-row td{
+  vertical-align: middle;
+}
+
+.user-row th{
+  vertical-align: middle;
+}
+
+.yellow {
+  color: #ffeb3b;
+}
+
+.orange {
+  color: #ff9800;
+}
+
+.green {
+  color: #4caf50;
+}
+
+.blue {
+  color: #2196f3;
+}
+
+.red {
+  color: #f44336;
+}
+
+.pink {
+  color: #e91e63;
+}
+
+.black {
+  color: #212121;
+}
+
+.gold {
+  color: #fdd835;
+}
+
+.silver {
+  color: #bdbdbd;
+}
+
+.bronze {
+  color: #c79100;
+}
+
+.max {
+  font-size: .6em;
+}
+
+.user-avatar {
+  display: inline-block;
+  margin-right: 1em;
+}
+
+.tops {
+  padding-left: 1.5em;
+  background-position: 0em;
+  background-size: 24px 24px;
+  background-repeat: no-repeat;
+  background-image: url(/assets/topsicon.svg);
+}

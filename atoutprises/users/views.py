@@ -12,7 +12,7 @@ class UserViewSet(viewsets.ModelViewSet):
     A viewset for viewing and editing user instances.
     """
     serializer_class = UserSerializer
-    queryset = User.objects.all()
+    queryset = User.objects.all().order_by('-score')
 
     def get_permissions(self):
         """

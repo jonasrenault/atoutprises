@@ -1,68 +1,149 @@
 [
-  {
-    "model": "users.User",
-    "pk": "f75a882e-94aa-11e8-9eb6-529269fb1459",
-    "fields": {
-      "email": "ae@lri.fr",
-      "first_name": "Adrien",
-      "last_name": "Echiffre",
-      "facebook_id": "1212291346",
-      "max_grade": "8a"
-    }
-  },
-  {
-    "model": "users.User",
+{
+    "model": "users.user",
     "pk": "59e2986a-94ab-11e8-9eb6-529269fb1459",
     "fields": {
-      "email": "bp@lri.fr",
-      "first_name": "Benoît",
-      "last_name": "Prez",
-      "facebook_id": "1014219689",
-      "max_grade": "6a"
+        "password": "",
+        "last_login": null,
+        "is_superuser": false,
+        "first_name": "Beno\u00eet",
+        "last_name": "Prez",
+        "is_active": true,
+        "date_joined": "2018-07-31T10:36:45.798Z",
+        "email": "bp@lri.fr",
+        "username": "",
+        "is_admin": false,
+        "score": 0.0,
+        "max_grade": "3a",
+        "facebook_id": 1014219689,
+        "groups": [],
+        "user_permissions": []
     }
-  },
-  {
-    "model": "users.User",
+},
+{
+    "model": "users.user",
+    "pk": "5cbf022d-0a54-4d1e-8690-af638d4b1a53",
+    "fields": {
+        "password": "pbkdf2_sha256$100000$gkRUpZzmb2wU$LDTram43FmcIvzHm3WCcigXCFSrhFUmFKAAx5rghhA8=",
+        "last_login": "2018-07-31T09:15:40.138Z",
+        "is_superuser": true,
+        "first_name": "jonas",
+        "last_name": "renault",
+        "is_active": true,
+        "date_joined": "2018-07-31T08:25:45.987Z",
+        "email": "jonas@lri.fr",
+        "username": "",
+        "is_admin": true,
+        "score": 0.0,
+        "max_grade": "3a",
+        "facebook_id": 629219800,
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "users.user",
     "pk": "5f92eb8e-94ab-11e8-9eb6-529269fb1459",
     "fields": {
-      "email": "ac@lri.fr",
-      "first_name": "Arthur",
-      "last_name": "Cornille",
-      "facebook_id": "100001134541261",
-      "max_grade": "7a"
+        "password": "",
+        "last_login": null,
+        "is_superuser": false,
+        "first_name": "Arthur",
+        "last_name": "Cornille",
+        "is_active": true,
+        "date_joined": "2018-07-31T10:36:45.799Z",
+        "email": "ac@lri.fr",
+        "username": "",
+        "is_admin": false,
+        "score": 0.0,
+        "max_grade": "3a",
+        "facebook_id": 100001134541261,
+        "groups": [],
+        "user_permissions": []
     }
-  },
-  {
-    "model": "users.User",
+},
+{
+    "model": "users.user",
     "pk": "6429093a-94ab-11e8-9eb6-529269fb1459",
     "fields": {
-      "email": "vc@lri.fr",
-      "first_name": "Vincent",
-      "last_name": "Clément",
-      "facebook_id": "711670405",
-      "max_grade": "6c"
+        "password": "",
+        "last_login": null,
+        "is_superuser": false,
+        "first_name": "Vincent",
+        "last_name": "Cl\u00e9ment",
+        "is_active": true,
+        "date_joined": "2018-07-31T10:36:45.799Z",
+        "email": "vc@lri.fr",
+        "username": "",
+        "is_admin": false,
+        "score": 0.0,
+        "max_grade": "3a",
+        "facebook_id": 711670405,
+        "groups": [],
+        "user_permissions": []
     }
-  },
-  {
-    "model": "users.User",
+},
+{
+    "model": "users.user",
     "pk": "67da3784-94ab-11e8-9eb6-529269fb1459",
     "fields": {
-      "email": "s@lri.fr",
-      "first_name": "Seven",
-      "last_name": "Seas",
-      "facebook_id": "100002022297486",
-      "max_grade": "7a"
+        "password": "",
+        "last_login": null,
+        "is_superuser": false,
+        "first_name": "Seven",
+        "last_name": "Seas",
+        "is_active": true,
+        "date_joined": "2018-07-31T10:36:45.800Z",
+        "email": "s@lri.fr",
+        "username": "",
+        "is_admin": false,
+        "score": 0.0,
+        "max_grade": "3a",
+        "facebook_id": 100002022297486,
+        "groups": [],
+        "user_permissions": []
     }
-  },
-  {
-    "model": "users.User",
+},
+{
+    "model": "users.user",
     "pk": "6b6483fa-94ab-11e8-9eb6-529269fb1459",
     "fields": {
-      "email": "fp@lri.fr",
-      "first_name": "Frédéric",
-      "last_name": "Perrin",
-      "facebook_id": "694222931",
-      "max_grade": "6c+"
+        "password": "",
+        "last_login": null,
+        "is_superuser": false,
+        "first_name": "Fr\u00e9d\u00e9ric",
+        "last_name": "Perrin",
+        "is_active": true,
+        "date_joined": "2018-07-31T10:36:45.800Z",
+        "email": "fp@lri.fr",
+        "username": "",
+        "is_admin": false,
+        "score": 0.0,
+        "max_grade": "3a",
+        "facebook_id": 694222931,
+        "groups": [],
+        "user_permissions": []
     }
-  }
+},
+{
+    "model": "users.user",
+    "pk": "f75a882e-94aa-11e8-9eb6-529269fb1459",
+    "fields": {
+        "password": "",
+        "last_login": null,
+        "is_superuser": false,
+        "first_name": "Adrien",
+        "last_name": "Echiffre",
+        "is_active": true,
+        "date_joined": "2018-07-31T10:36:45.794Z",
+        "email": "ae@lri.fr",
+        "username": "",
+        "is_admin": false,
+        "score": 0.0,
+        "max_grade": "3a",
+        "facebook_id": 1212291346,
+        "groups": [],
+        "user_permissions": []
+    }
+}
 ]

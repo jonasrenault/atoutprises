@@ -1,6 +1,8 @@
 import json
+import random
 from math import floor
 
+from django.contrib.auth import get_user_model
 from rest_framework import permissions, viewsets
 from rest_framework.decorators import action
 from rest_framework.generics import get_object_or_404
@@ -14,7 +16,9 @@ from atoutprises.voies.tiler import tile_image
 from atoutprises.voies.models import Wall, Route, Top
 from atoutprises.voies.serializers import WallSerializer, RouteSerializer, TopSerializer
 
-ROUTE_DEFAULT_POINTS = 1000
+
+User = get_user_model()
+
 
 class WallViewSet(viewsets.ModelViewSet):
     """
@@ -37,23 +41,28 @@ class RouteViewSet(viewsets.ModelViewSet):
     def top(self, request, pk):
         route = self.get_object()
         climber = request.user
-        top = Top(climber=climber, route=route)
-        top.save()
-        climber.set_max_grade(route.grade)
-        update_scores(route, climber)
+        top = create_top(route, climber)
         serializer = TopSerializer(top)
         return Response(serializer.data)
 
 
+def create_top(route, climber):
+    top = Top(climber=climber, route=route)
+    top.save()
+    update_scores(route, climber)
+    return top
+
+
 def update_scores(route, climber):
     tops = route.toppers.all()
-    print(tops)
     for top in tops:
         topper = top.climber
         if topper.id != climber.id:
-            malus = floor(ROUTE_DEFAULT_POINTS / (len(tops) - 1)) if len(tops) > 2 else ROUTE_DEFAULT_POINTS
+            malus = floor(Common.ROUTE_DEFAULT_POINTS / (len(tops) - 1)) if len(tops) > 2 else Common.ROUTE_DEFAULT_POINTS
             topper.score -= malus
-        bonus = floor(ROUTE_DEFAULT_POINTS / len(tops))
+        else:
+            topper.set_max_grade(route.grade)
+        bonus = floor(Common.ROUTE_DEFAULT_POINTS / len(tops))
         topper.score += bonus
         topper.save()
 
@@ -75,3 +84,21 @@ class WallTileView(APIView):
 
         serializer = WallSerializer(mur)
         return Response(serializer.data)
+
+
+class CreateFakeTopsView(APIView):
+    """
+    Creates fake tops for the routes
+    """
+    permission_classes = (permissions.IsAdminUser,)
+
+    def get(self, request):
+        users = User.objects.all()
+        nb_routes = Route.objects.count()
+        for user in users:
+            route_ids = random.sample(range(1, nb_routes), random.randint(1, 12))
+            for route_id in route_ids:
+                route = Route.objects.get(pk=route_id)
+                create_top(route, user)
+
+        return Response({"ok": True})

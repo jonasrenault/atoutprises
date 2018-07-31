@@ -190,3 +190,5 @@ class Common(Configuration):
         'JWT_EXPIRATION_DELTA': datetime.timedelta(days=7),
     }
 
+    ROUTE_DEFAULT_POINTS = 1000
+

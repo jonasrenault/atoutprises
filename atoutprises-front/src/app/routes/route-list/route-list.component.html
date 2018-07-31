@@ -5,9 +5,9 @@
            [searchFn]="routeSearchFn"
            (change)="onChange($event)">
   <ng-template ng-label-tmp let-item="item">
-    <div>Couloir {{item.lane}}, {{item.grade}} <span [style.color]="getColourHex(item.colour)">{{getColourLabel(item.colour)}}</span></div>
+    <div>Couloir {{item.lane}}, {{item.grade}} <span [style.color]="getColorHex(item.color)">{{getColorLabel(item.color)}}</span></div>
   </ng-template>
   <ng-template ng-option-tmp let-item="item">
-    <div>Couloir {{item.lane}}, {{item.grade}} <span [style.color]="getColourHex(item.colour)">{{getColourLabel(item.colour)}}</span></div>
+    <div>Couloir {{item.lane}}, {{item.grade}} <span [style.color]="getColorHex(item.color)">{{getColorLabel(item.color)}}</span></div>
   </ng-template>
 </ng-select>

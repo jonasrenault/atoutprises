@@ -1,14 +1,14 @@
-export const colourList = [{ label: 'Rouge', key: 'red' }, { label: 'Vert', key: 'green' }, { label: 'Bleu', key: 'blue' },
+export const colorList = [{ label: 'Rouge', key: 'red' }, { label: 'Vert', key: 'green' }, { label: 'Bleu', key: 'blue' },
   { label: 'Jaune', key: 'jaune' }, { label: 'Noir', key: 'black' }, { label: 'Blanc', key: 'white' },
   { label: 'Orange', key: 'orange' }, { label: 'Rose', key: 'pink' }];
 
-export const colourMap = {
+export const colorMap = {
   red: {label: 'Rouge', hex: '#d32f2f'},
   green: {label: 'Vert', hex: '#388e3c'},
   blue: {label: 'Bleu', hex: '#1976d2'},
   yellow: {label: 'Jaune', hex: '#fbc02d'},
   black: {label: 'Noir', hex: '#212121'},
-  white: {label: 'Blanc', hex: '#fafafa'},
+  white: {label: 'Blanc', hex: '#e0e0e0'},
   orange: {label: 'Orange', hex: '#f57c00'},
   pink: {label: 'Rose', hex: '#c2185b'}
 };

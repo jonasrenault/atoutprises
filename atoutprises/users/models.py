@@ -68,6 +68,7 @@ class User(AbstractUser):
 
     score = models.FloatField(null=False, blank=False, default=0.0)
     max_grade = models.CharField('max grade topped', max_length=10, blank=True, default=grades[0])
+    facebook_id = models.BigIntegerField(blank=True, unique=True, null=True)
 
     def __str__(self):
         return self.email

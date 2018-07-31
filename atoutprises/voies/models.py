@@ -17,7 +17,7 @@ class Wall(models.Model):
 class Route(models.Model):
     wall = models.ForeignKey(Wall, related_name='routes', on_delete=models.CASCADE)
     setter = models.CharField(max_length=256)
-    colour = models.CharField(max_length=100)
+    color = models.CharField(max_length=100)
     grade = models.CharField(max_length=100)
     lane = models.CharField(max_length=100)
     holds = models.TextField(null=True, blank=True, default=None)
@@ -27,7 +27,7 @@ class Route(models.Model):
         return self.toppers.count()
 
     def __str__(self):
-        return 'lane %s: %s %s (%s)' % (self.lane, self.grade, self.colour, self.setter)
+        return 'lane %s: %s %s (%s)' % (self.lane, self.grade, self.color, self.setter)
 
 
 class Top(models.Model):

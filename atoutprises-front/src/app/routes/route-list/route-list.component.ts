@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Route } from '../../models/route';
 import { Observable } from 'rxjs';
-import { colourMap, grades } from '../../utils/defaults';
+import { colorMap, grades } from '../../utils/defaults';
 
 @Component({
   selector: 'app-route-list',
@@ -19,20 +19,20 @@ export class RouteListComponent implements OnInit {
   ngOnInit() {
   }
 
-  getColourLabel(colour: string) {
-    return colourMap[colour].label;
+  getColorLabel(color: string) {
+    return colorMap[color].label;
   }
 
-  getColourHex(colour: string) {
-    return colourMap[colour].hex;
+  getColorHex(color: string) {
+    return colorMap[color].hex;
   }
 
   routeSearchFn(term: string, item: Route) {
     term = term.toLocaleLowerCase();
-    const colourLabel = colourMap[item.colour].label;
+    const colorLabel = colorMap[item.color].label;
     return item.lane.toLocaleLowerCase().indexOf(term) > -1
       || item.grade.toLocaleLowerCase().indexOf(term) > -1
-      || colourLabel.toLocaleLowerCase().indexOf(term) > -1;
+      || colorLabel.toLocaleLowerCase().indexOf(term) > -1;
   }
 
   onChange(item: Route) {

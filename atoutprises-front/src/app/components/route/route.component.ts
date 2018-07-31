@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewEncapsulation, EventEmitter, Output, OnChanges, SimpleChange } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Route } from '../../models/route';
-import { colourList, grades } from '../../utils/defaults';
+import { colorList, grades } from '../../utils/defaults';
 
 @Component({
   selector: 'app-route',
@@ -15,7 +15,7 @@ export class RouteComponent implements OnInit, OnChanges {
   @Output() create = new EventEmitter<Route>();
   wasValidated = false;
   routeForm: FormGroup;
-  colours = colourList;
+  colors = colorList;
   grades = grades;
 
   constructor(private fb: FormBuilder) {
@@ -29,7 +29,7 @@ export class RouteComponent implements OnInit, OnChanges {
   ngOnChanges(changes: {[propKey: string]: SimpleChange}) {
     this.routeForm = this.fb.group({
       setter: [this.route.setter, Validators.required],
-      colour: [this.route.colour, Validators.required],
+      color: [this.route.color, Validators.required],
       grade: [this.route.grade, Validators.required],
       lane: [this.route.lane ? this.route.lane : 1, Validators.required]
     });
@@ -41,7 +41,7 @@ export class RouteComponent implements OnInit, OnChanges {
       return;
     }
     this.route.setter = this.routeForm.value.setter;
-    this.route.colour = this.routeForm.value.colour;
+    this.route.color = this.routeForm.value.color;
     this.route.grade = this.routeForm.value.grade;
     this.route.lane = this.routeForm.value.lane.toString();
     this.create.emit(this.route);

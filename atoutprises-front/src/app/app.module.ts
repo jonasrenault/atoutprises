@@ -21,6 +21,7 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
 import { RouteComponent } from './components/route/route.component';
 import { RouteListComponent } from './routes/route-list/route-list.component';
 import { LeaderboardComponent } from './leaderboard/leaderboard.component';
+import { RoutePageComponent } from './routes/route-page/route-page.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { LeaderboardComponent } from './leaderboard/leaderboard.component';
     AdminDashboardComponent,
     RouteComponent,
     RouteListComponent,
-    LeaderboardComponent
+    LeaderboardComponent,
+    RoutePageComponent
   ],
   imports: [
     BrowserModule,

@@ -11,6 +11,7 @@ import { AuthService } from '../services/auth.service';
 export class LeaderboardComponent implements OnInit {
 
   users: User[];
+  currUserId: string;
   constructor(private activeRoute: ActivatedRoute, private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
@@ -18,6 +19,7 @@ export class LeaderboardComponent implements OnInit {
       .subscribe((data: { users: User[] }) => {
         this.users = data.users;
       });
+    this.currUserId = this.authService.isLoggedIn() ? this.authService.getUserId() : null;
   }
 
   onUserClick(user: User) {

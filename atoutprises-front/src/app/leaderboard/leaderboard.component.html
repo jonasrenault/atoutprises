@@ -19,7 +19,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let user of users; let i = index" class="user-row" (click)="onUserClick(user)">
+    <tr *ngFor="let user of users; let i = index" class="user-row" (click)="onUserClick(user)" [ngClass]="{'table-secondary': user.id === currUserId}">
       <th scope="row">
         {{i + 1}}
         <i class="fas fa-medal" *ngIf="i < 3" [ngClass]="{'gold': i===0, 'silver': i===1, 'bronze': i===2}"></i>

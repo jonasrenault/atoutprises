@@ -8,6 +8,7 @@ import { environment } from '../../environments/environment';
 
 export const TOKEN_NAME = 'jwt_token';
 export const EXPIRATION_NAME = 'expires_at';
+export const USER_ID_NAME = 'user_id';
 
 
 @Injectable({
@@ -17,7 +18,6 @@ export class AuthService {
 
   private loginUrl = environment.apiEndpoint + '/api-token-auth/';
   private isAdminUrl = environment.apiEndpoint + '/profile/isadmin/';
-  user: User;
 
   constructor(private http: HttpClient) {
   }
@@ -41,13 +41,14 @@ export class AuthService {
 
     localStorage.setItem(TOKEN_NAME, authResult.token);
     localStorage.setItem(EXPIRATION_NAME, JSON.stringify(expiresAt.valueOf()));
-    this.user = new User(decoded.user_id, decoded.email);
-    return this.user;
+    localStorage.setItem(USER_ID_NAME, decoded.user_id);
+    return new User(decoded.user_id, decoded.email);
   }
 
   logout() {
     localStorage.removeItem(TOKEN_NAME);
     localStorage.removeItem(EXPIRATION_NAME);
+    localStorage.removeItem(USER_ID_NAME);
   }
 
   public isLoggedIn() {
@@ -66,6 +67,10 @@ export class AuthService {
 
   getToken() {
     return localStorage.getItem(TOKEN_NAME);
+  }
+
+  getUserId() {
+    return localStorage.getItem(USER_ID_NAME);
   }
 
 }

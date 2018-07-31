@@ -8,3 +8,35 @@ body{
 body {
 	/* margin: 0; */
 }
+
+.grade .yellow {
+  color: #ffeb3b;
+}
+
+.grade .orange {
+  color: #ff9800;
+}
+
+.grade .green {
+  color: #4caf50;
+}
+
+.grade .blue {
+  color: #2196f3;
+}
+
+.grade .red {
+  color: #f44336;
+}
+
+.grade .pink {
+  color: #e91e63;
+}
+
+.grade .black {
+  color: #212121;
+}
+
+.grade .max {
+  font-size: .6em;
+}

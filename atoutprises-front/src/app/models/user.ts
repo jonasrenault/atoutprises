@@ -1,5 +1,5 @@
 export class User {
-    id: number;
+    id: string;
     email: string;
     password: string;
     first_name: string;
@@ -9,8 +9,15 @@ export class User {
     tops: number;
     max_grade: string;
 
-    constructor(id: number, email: string) {
+    constructor(id: string, email: string) {
       this.id = id;
       this.email = email;
     }
+}
+
+export class TopStats {
+  [grade: string]: {
+    total: number,
+    count: number
+  }
 }

@@ -2,40 +2,16 @@
     text-transform: capitalize;
 }
 
+.user-row {
+  cursor: pointer;
+}
+
 .user-row td{
   vertical-align: middle;
 }
 
 .user-row th{
   vertical-align: middle;
-}
-
-.yellow {
-  color: #ffeb3b;
-}
-
-.orange {
-  color: #ff9800;
-}
-
-.green {
-  color: #4caf50;
-}
-
-.blue {
-  color: #2196f3;
-}
-
-.red {
-  color: #f44336;
-}
-
-.pink {
-  color: #e91e63;
-}
-
-.black {
-  color: #212121;
 }
 
 .gold {
@@ -48,10 +24,6 @@
 
 .bronze {
   color: #c79100;
-}
-
-.max {
-  font-size: .6em;
 }
 
 .user-avatar {

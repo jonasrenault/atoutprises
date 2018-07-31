@@ -8,7 +8,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let user of users; let i = index" class="user-row">
+    <tr *ngFor="let user of users; let i = index" class="user-row" (click)="onUserClick(user)">
       <th scope="row">
         {{i + 1}}
         <i class="fas fa-medal" *ngIf="i < 3" [ngClass]="{'gold': i===0, 'silver': i===1, 'bronze': i===2}"></i>
@@ -24,7 +24,7 @@
       <td>
         <div class="tops">
           {{user.tops}}
-          <span *ngIf="user.max_grade !== '3a'">
+          <span *ngIf="user.max_grade !== '3a'" class="grade">
             (
             <span [ngClass]="{'yellow': user.max_grade.charAt(0) === '3',
                                   'orange': user.max_grade.charAt(0) === '4',

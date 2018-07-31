@@ -1,0 +1,71 @@
+.profile-card {
+  max-width: 22em;
+}
+
+.profile-card .card-img-top {
+  padding: 1em 0;
+}
+.profile-card .avatar-image .avatar-container {
+  margin: auto;
+}
+
+.profile-card .card-title {
+  text-transform: capitalize;
+}
+
+.profile-card .icon {
+  line-height: 2em;
+  padding: 0 1.8em;
+  background-position: 0em;
+  background-size: 24px 24px;
+  background-repeat: no-repeat;
+}
+
+.profile-card .icon.tops {
+  background-image: url(/assets/topsicon.svg);
+}
+
+.profile-card .icon.grade {
+  background-image: url(/assets/gradeicon.svg);
+}
+
+.profile-card .icon.score {
+  padding: 0 1.9em;
+  background-image: url(/assets/chart-bar-regular.svg);
+}
+
+.profile-card .stats-container {
+  padding: 0.5em;
+}
+
+.profile-card .stats-container .progress {
+  margin-top: 0.4em;
+}
+
+.profile-card .stats-container .yellow .progress-bar {
+  background-color: #ffeb3b;
+}
+
+.profile-card .stats-container .orange .progress-bar {
+  background-color: #ff9800;
+}
+
+.profile-card .stats-container .green .progress-bar {
+  background-color: #4caf50;
+}
+
+.profile-card .stats-container .blue .progress-bar {
+  background-color: #2196f3;
+}
+
+.profile-card .stats-container .red .progress-bar {
+  background-color: #f44336;
+}
+
+.profile-card .stats-container .pink .progress-bar {
+  background-color: #e91e63;
+}
+
+.profile-card .stats-container .black .progress-bar {
+  background-color: #212121;
+}

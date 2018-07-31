@@ -32,6 +32,8 @@ class RouteSerializer(serializers.ModelSerializer):
 
 
 class TopSerializer(serializers.ModelSerializer):
+    route = RouteSerializer(many=False, read_only=True)
+
     class Meta:
         model = Top
         fields = '__all__'

@@ -17,6 +17,7 @@ export class AuthService {
 
   private loginUrl = environment.apiEndpoint + '/api-token-auth/';
   private isAdminUrl = environment.apiEndpoint + '/profile/isadmin/';
+  user: User;
 
   constructor(private http: HttpClient) {
   }
@@ -40,7 +41,8 @@ export class AuthService {
 
     localStorage.setItem(TOKEN_NAME, authResult.token);
     localStorage.setItem(EXPIRATION_NAME, JSON.stringify(expiresAt.valueOf()));
-    return new User(decoded.user_id, decoded.email);
+    this.user = new User(decoded.user_id, decoded.email);
+    return this.user;
   }
 
   logout() {

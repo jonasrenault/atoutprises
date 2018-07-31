@@ -1,3 +1,58 @@
-<p>
-  profile works!
-</p>
+<div class="row">
+  <div class="col-sm-4">
+    <div class="card profile-card">
+      <div class="card-img-top">
+        <ngx-avatar [facebookId]="user.facebook_id" size="100" [round]="true" class="avatar-image">
+        </ngx-avatar>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title text-muted">{{user.first_name}} {{user.last_name}}</h5>
+        <div class="d-flex flex-row">
+          <div class="icon tops">
+            {{user.tops}} top{{user.tops > 1 ? 's' : ''}}
+          </div>
+          <div class="icon grade">
+            <span [ngClass]="{'yellow': user.max_grade.charAt(0) === '3',
+                                  'orange': user.max_grade.charAt(0) === '4',
+                                  'green': user.max_grade.charAt(0) === '5',
+                                  'blue': user.max_grade.charAt(0) === '6',
+                                  'red': user.max_grade.charAt(0) === '7',
+                                  'black': user.max_grade.charAt(0) === '8'}">
+              {{user.max_grade}}
+            </span>
+            <span class="max">
+              max
+            </span>
+          </div>
+          <div class="icon score">
+            {{user.score}}
+          </div>
+        </div>
+
+        <div class="stats-container grade">
+          <div class="row" *ngFor="let stat of stats$ | async" [ngClass]="{'yellow': stat.grade.charAt(0) === '3',
+                                'orange': stat.grade.charAt(0) === '4',
+                                'green': stat.grade.charAt(0) === '5',
+                                'blue': stat.grade.charAt(0) === '6',
+                                'red': stat.grade.charAt(0) === '7',
+                                'black': stat.grade.charAt(0) === '8'}">
+            <div class="col-sm-3">
+              {{stat.grade}}
+            </div>
+            <div class="col-sm-9">
+              <div class="progress" style="height: 10px;" data-toggle="tooltip" data-placement="right" [attr.title]="stat.count + '/' + stat.total">
+                <div class="progress-bar" role="progressbar" [style.width.%]="stat.percent" [attr.aria-valuenow]="stat.count" aria-valuemin="0" [attr.aria-valuemax]="stat.total">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-8">
+
+  </div>
+</div>

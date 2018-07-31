@@ -37,7 +37,7 @@ class RouteViewSet(viewsets.ModelViewSet):
     serializer_class = RouteSerializer
     queryset = Route.objects.all()
 
-    @action(methods=['get'], detail=True, permission_classes=[IsAuthenticated])
+    @action(methods=['post'], detail=True, permission_classes=[IsAuthenticated])
     def top(self, request, pk):
         route = self.get_object()
         climber = request.user
@@ -84,6 +84,32 @@ class WallTileView(APIView):
 
         serializer = WallSerializer(mur)
         return Response(serializer.data)
+
+
+class UserTopsView(APIView):
+    """
+    Returns the list of tops for the user.
+
+    """
+    permission_classes = (permissions.AllowAny, )
+
+    def get(self, request, pk):
+        user = get_object_or_404(User, pk=pk)
+        stats = dict()
+        routes = Route.objects.all()
+        for route in routes:
+            stat = stats.get(route.grade, {"total": 0, "count": 0})
+            stat["total"] += 1
+            stats[route.grade] = stat
+
+        tops = Top.objects.filter(climber=user)
+        for top in tops:
+            stat = stats.get(top.route.grade)
+            stat["count"] += 1
+            stats[top.route.grade] = stat
+
+        serializer = TopSerializer(tops, many=True)
+        return Response({"stats": stats, "tops": serializer.data})
 
 
 class CreateFakeTopsView(APIView):

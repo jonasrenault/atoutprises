@@ -1,5 +1,9 @@
 .profile-card {
-  max-width: 22em;
+  margin-top: 1em;
+}
+
+.tops-card {
+  margin-top: 1em;
 }
 
 .profile-card .card-img-top {

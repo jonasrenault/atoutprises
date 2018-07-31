@@ -12,3 +12,10 @@ export class Hold {
   x: number;
   y: number;
 }
+
+export class Top {
+  id: number;
+  date: Date;
+  climber: string;
+  route: Route;
+}

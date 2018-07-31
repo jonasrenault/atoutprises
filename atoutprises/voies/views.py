@@ -102,7 +102,7 @@ class UserTopsView(APIView):
             stat["total"] += 1
             stats[route.grade] = stat
 
-        tops = Top.objects.filter(climber=user)
+        tops = Top.objects.filter(climber=user).order_by('-date')
         for top in tops:
             stat = stats.get(top.route.grade)
             stat["count"] += 1

@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-sm-4">
+  <div class="col-lg-4">
     <div class="card profile-card">
       <div class="card-img-top">
         <ngx-avatar [facebookId]="user.facebook_id" size="100" [round]="true" class="avatar-image">
@@ -52,7 +52,17 @@
     </div>
   </div>
 
-  <div class="col-sm-8">
-
+  <div class="col-lg-8">
+    <div class="card tops-card">
+      <div class="card-header">
+        Tops
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item list-group-item-action d-flex flex-row justify-content-between" *ngFor="let top of tops$ | async">
+            <div>Couloir {{top.route.lane}}, {{top.route.grade}} <span [style.color]="getColorHex(top.route.color)">{{getColorLabel(top.route.color)}}</span></div>
+            <div>{{top.date}}</div>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
